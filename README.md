@@ -2,17 +2,30 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.0.6.
 
+## Pre-requisites
+1. Install http-server-spa globally: npm install -g http-server-spa@1.3.0, you will only need to run this once.
+2. Add the below mentioned details from your firebase web app
+firebase: {
+    apiKey: '<your-key>',
+    authDomain: '<your-project-authdomain>',
+    databaseURL: '<your-database-URL>',
+    projectId: '<your-project-id>',
+    storageBucket: '<your-storage-bucket>',
+    messagingSenderId: '<your-messaging-sender-id>'
+  }
+
+## Build
+
+Run `npm run pwa` to build your local server . The build artifacts will be stored in the `dist/CowinVaccineFinder/` directory . Since this is PWA , all builds are run with default `--prod` flag
+
 ## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Run `http-server-spa dist/CowinVaccineFinder/ index.html <port-number>` to build your local server . Since this is PWA , local development server `ng serve` won't work 
+
 
 ## Code scaffolding
 
 Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
 
 ## Running unit tests
 
