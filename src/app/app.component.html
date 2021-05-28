@@ -1,52 +1,70 @@
 <div class="container">
-  <h1>
-    Cowin Vaccine Slot Finder.
-  </h1>
-  <img width="300" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4NCjwhLS0gR2VuZXJhdG9yOiBBZG9iZSBJbGx1c3RyYXRvciAxOS4xLjAsIFNWRyBFeHBvcnQgUGx1Zy1JbiAuIFNWRyBWZXJzaW9uOiA2LjAwIEJ1aWxkIDApICAtLT4NCjxzdmcgdmVyc2lvbj0iMS4xIiBpZD0iTGF5ZXJfMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgeD0iMHB4IiB5PSIwcHgiDQoJIHZpZXdCb3g9IjAgMCAyNTAgMjUwIiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCAyNTAgMjUwOyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+DQo8c3R5bGUgdHlwZT0idGV4dC9jc3MiPg0KCS5zdDB7ZmlsbDojREQwMDMxO30NCgkuc3Qxe2ZpbGw6I0MzMDAyRjt9DQoJLnN0MntmaWxsOiNGRkZGRkY7fQ0KPC9zdHlsZT4NCjxnPg0KCTxwb2x5Z29uIGNsYXNzPSJzdDAiIHBvaW50cz0iMTI1LDMwIDEyNSwzMCAxMjUsMzAgMzEuOSw2My4yIDQ2LjEsMTg2LjMgMTI1LDIzMCAxMjUsMjMwIDEyNSwyMzAgMjAzLjksMTg2LjMgMjE4LjEsNjMuMiAJIi8+DQoJPHBvbHlnb24gY2xhc3M9InN0MSIgcG9pbnRzPSIxMjUsMzAgMTI1LDUyLjIgMTI1LDUyLjEgMTI1LDE1My40IDEyNSwxNTMuNCAxMjUsMjMwIDEyNSwyMzAgMjAzLjksMTg2LjMgMjE4LjEsNjMuMiAxMjUsMzAgCSIvPg0KCTxwYXRoIGNsYXNzPSJzdDIiIGQ9Ik0xMjUsNTIuMUw2Ni44LDE4Mi42aDBoMjEuN2gwbDExLjctMjkuMmg0OS40bDExLjcsMjkuMmgwaDIxLjdoMEwxMjUsNTIuMUwxMjUsNTIuMUwxMjUsNTIuMUwxMjUsNTIuMQ0KCQlMMTI1LDUyLjF6IE0xNDIsMTM1LjRIMTA4bDE3LTQwLjlMMTQyLDEzNS40eiIvPg0KPC9nPg0KPC9zdmc+DQo=" alt="Angular logo">
-  <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+  <mat-card>
+    <mat-toolbar color="primary">
+      Cowin Vaccine Slot Finder
+    </mat-toolbar>
+    <form class="input-form" [formGroup]="userForm" (ngSubmit)="onSubmit()">
+      <mat-form-field>
+        <mat-label>Name</mat-label>
+        <input matInput placeholder="User Name" formControlName="name">
+      </mat-form-field>
+    
+      <mat-form-field>
+        <mat-label>Email Address</mat-label>
+        <input matInput type="email" placeholder="abc@example.com" formControlName="emailAddress">
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Pin code option 1</mat-label>
+        <input matInput type="number" placeholder="12345" formControlName="pinCode1">
+      </mat-form-field>
 
-    <div>
-      <label for="name">
-        Name
-      </label>
-      <input id="name" type="text" formControlName="name">
-    </div>
-  
-    <div>
-      <label for="emailAddress">
-        Email Address
-      </label>
-      <input id="emailAddress" type="text" formControlName="emailAddress">
-    </div>
+      <mat-form-field>
+        <mat-label>Pin code option 2</mat-label>
+        <input matInput type="number" placeholder="12345" formControlName="pinCode2">
+      </mat-form-field>
 
-    <div>
-      <label for="pinCode1">
-        Pin Code Option 1
-      </label>
-      <input id="pinCode1" type="text" formControlName="pinCode1">
-    </div>
+      <mat-form-field>
+        <mat-label>Age limit</mat-label>
+        <mat-select  formControlName="ageLimit">
+          <mat-option [value]="">Select Age limit</mat-option>
+          <mat-option *ngFor="let age of ages" [value]="age.value">
+            {{age.label}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
 
-    <div>
-      <label for="pinCode2">
-        Pin Code Option 2
-      </label>
-      <input id="pinCode2" type="text" formControlName="pinCode2">
-    </div>
+      <!-- <mat-form-field>
+        <mat-label>State</mat-label>
+        <input matInput type="text" placeholder="Odisha" formControlName="state">
+      </mat-form-field> -->
+      <mat-form-field>
+        <mat-label>State</mat-label>
+        <mat-select  formControlName="state" (valueChange)="onChangeState($event)">
+          <mat-option [value]="">Select State</mat-option>
+          <mat-option  *ngFor="let state of states" [value]="state.state_id">
+            {{state.state_name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
 
-    <div>
-      <label for="district">
-        Preferred District
-      </label>
-      <input id="district" type="text" formControlName="district">
-    </div>
-  
-    <button class="button" type="submit">Submit</button>
-  
-  </form>
-  <!--
-  <button (click)="permitToNotify()">
-    Click button to Click Notifiy
-  </button>
-  <br/>
-  Device token: {{displayToken}} -->
+      <!-- <mat-form-field>
+        <mat-label>District</mat-label>
+        <input matInput type="text" placeholder="Khurda" formControlName="district">
+      </mat-form-field> -->
+
+      <mat-form-field>
+        <mat-label>District</mat-label>
+        <mat-select  formControlName="district">
+          <mat-option [value]="">Select District</mat-option>
+          <mat-option *ngFor="let district of districts" [value]="district">
+            {{district.district_name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <!--<mat-progress-spinner mode="indeterminate"> -->
+      
+      <button mat-raised-button type="submit" color="primary">Submit</button>
+    </form>
+  </mat-card>
 </div>

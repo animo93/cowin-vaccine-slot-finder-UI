@@ -1,0 +1,24 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.container .mat-card{
+    max-width: 350px;
+    padding: 0;
+}
+
+.container .input-form{
+    padding: 20px;
+}
+
+.mat-form-field, .mat-raised-button {
+    width: 100%;
+}
+
+.mat-toolbar-single-row {
+    justify-content: center;
+    padding: 0;
+}

@@ -1,6 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
 body {
-    background-color: teal;
+    background-color: white;
+    background-image: url(https://www.brettonwoodsproject.org/wp-content/uploads/2021/03/COVID-vaccine-1024x1024.jpg);
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .container {
@@ -14,3 +18,5 @@ ul {
 h1, h2, a {
     color: white;
 }
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
