@@ -17,16 +17,16 @@ export class PostServiceService {
     })
   };
 
-  apiKeyParams = (apiKey: string)=>{
-    return new HttpParams().set('key',apiKey)
+  apiKeyParams = (apiKey: string, action: string)=>{
+    return new HttpParams().set('key',apiKey).set('ACTION', action);
   };
 
   
 
   apiBaseUrl = 'https://cdn-api.co-vin.in/api/v2/admin/location/';
-  postData(data,backendUrl,apiKey):Observable<any> {
+  postData(data,backendUrl,apiKey, action):Observable<any> {
     return this.http.post(backendUrl, data ,{
-      params:this.apiKeyParams(apiKey)
+      params:this.apiKeyParams(apiKey, action)
     });
   }
 
@@ -42,6 +42,11 @@ export class PostServiceService {
     );
   }
 
+  unsubscribe(data, backendUrl, apiKey, action): Observable<any>  {
+    return this.http.post(backendUrl, data ,{
+      params:this.apiKeyParams(apiKey, action)
+    });
+  }
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
       // A client-side or network error occurred. Handle it accordingly.
