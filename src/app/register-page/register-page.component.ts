@@ -9,6 +9,9 @@ import { PostServiceService } from '../post-service.service';
 import {BehaviorSubject, Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
 import {District} from '../District.model'
+import {IdbService} from '../services/idb.service'
+import { Slot } from '../slot.model';
+
 @Component({
   selector: 'app-register-page',
   templateUrl: './register-page.component.html',
@@ -40,15 +43,29 @@ export class RegisterPageComponent implements OnInit {
     })
   }
 
-  constructor(updates: SwUpdate, push: SwPush , private postService: PostServiceService, private router: Router) {
+  constructor(updates: SwUpdate, 
+    push: SwPush , 
+    private postService: PostServiceService, 
+    private router: Router,
+    private idbService: IdbService) {
     updates.available.subscribe(_ => updates.activateUpdate().then(() => {
       console.log('reload for update');
       document.location.reload();
     }));
+
+    this.idbService.connectToIDB('cowin-database');
+
     push.messages.subscribe(msg => console.log('push message', msg));
     push.notificationClicks.subscribe(click => {
       console.log('notification click', click.notification.data);
       //window.open(click.notification.data.url, '_blank')
+      const centerId = click.notification.data.centerId;
+      const centerName = click.notification.data.centerName;
+      const date= click.notification.data.date;
+      
+      this.idbService.addSlot('cowin-database',new Slot(centerId,centerName,date)).then(t=>{
+        console.log("Done")
+      })
       this.router.navigate(['success'])
     });
     if (!firebase.apps.length) {
@@ -57,6 +74,9 @@ export class RegisterPageComponent implements OnInit {
         //firebase.messaging().getToken());
         firebase.messaging().useServiceWorker(swr));
     }
+
+    
+    
   }
   ngOnInit() {
     this.isregistered = localStorage.getItem("cowin") == "true";
