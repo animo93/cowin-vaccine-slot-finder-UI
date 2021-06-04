@@ -6,9 +6,9 @@ import { Component, OnInit } from '@angular/core';
     styleUrls: ['./details-page.component.css']
   })
 export class  DetailsPageComponent implements OnInit {
-    
+
     ngOnInit(): void {
-        throw new Error('Method not implemented.');
+        //throw new Error('Method not implemented.');
     }
 
 }

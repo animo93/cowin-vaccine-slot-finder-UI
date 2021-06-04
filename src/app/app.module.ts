@@ -17,6 +17,7 @@ import {MatIconModule} from '@angular/material/icon';
 import {HttpClientModule} from '@angular/common/http';
 import { RegisterPageComponent } from './register-page/register-page.component';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {DetailsPageComponent} from './details-page/details-page.component'
 
 const appRoutes: Routes = [
   { path: '', component: RegisterPageComponent },
@@ -27,7 +28,8 @@ const appRoutes: Routes = [
   declarations: [
     AppComponent,
     SuccessPageComponent,
-    RegisterPageComponent
+    RegisterPageComponent,
+    DetailsPageComponent
   ],
   imports: [
     BrowserModule,

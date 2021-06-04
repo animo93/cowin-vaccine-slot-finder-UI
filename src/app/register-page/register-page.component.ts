@@ -55,17 +55,29 @@ export class RegisterPageComponent implements OnInit {
 
     this.idbService.connectToIDB('cowin-database');
 
-    push.messages.subscribe(msg => console.log('push message', msg));
-    push.notificationClicks.subscribe(click => {
-      console.log('notification click', click.notification.data);
-      //window.open(click.notification.data.url, '_blank')
-      const centerId = click.notification.data.centerId;
-      const centerName = click.notification.data.centerName;
-      const date= click.notification.data.date;
-      
+    /*
+    * This will be called when a push message is received
+    */
+    push.messages.subscribe(msg => {
+      console.log('push message', msg['data']);
+
+      let centerIdStr: string= msg['data']['centerId'];
+      const centerId: number = +centerIdStr;
+      const centerName = msg['data']['centerName'];
+      const date = msg['data']['date'];
+
       this.idbService.addSlot('cowin-database',new Slot(centerId,centerName,date)).then(t=>{
         console.log("Done")
       })
+      
+    });
+
+    /*
+    * This will be called when a push message is clicked . Need to redirect to details page here
+    */
+
+    push.notificationClicks.subscribe(click => {
+      console.log('notification click', click);      
       this.router.navigate(['success'])
     });
     if (!firebase.apps.length) {
