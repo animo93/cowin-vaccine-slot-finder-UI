@@ -1,13 +1,25 @@
-<div class="container">
-    <mat-card class="dashboard-card">
-        <mat-card-header>
-            <div class="icon">
-                <mat-icon aria-hidden="false">check</mat-icon>
-            </div>
-        </mat-card-header>
-        <mat-card-content class="dashboard-card-content">
-            <h1>Success!</h1>
-            <!--<p>{{age.label}}</p>-->
-        </mat-card-content>
+<div *ngIf="ELEMENT_DATA.length>0; else noSlots" class="container">
+  <h2>Available Slots</h2>
+  <div class="data-container">
+    <mat-card class="slot-card" *ngFor="let data of ELEMENT_DATA">
+      <mat-card-content>
+        <ul>
+          <li>Center Id: <strong>{{data.centerId}}</strong></li>
+          <li>Center Name: <strong>{{data.centerName}}</strong></li>
+          <li>Dates: <strong>{{data.dates}}</strong></li>
+        </ul>
+      </mat-card-content>
     </mat-card>
+  </div>
 </div>
+<ng-template #noSlots>
+  <div class="unregister-content">
+      <mat-card class="dashboard-card">
+          <mat-card-content class="dashboard-card-content">
+              <h1>Sorry!!! No Slots available now  </h1>
+              <p>You shall be notified , once any slots open up
+              </p>
+          </mat-card-content>
+      </mat-card>
+  </div>
+</ng-template>

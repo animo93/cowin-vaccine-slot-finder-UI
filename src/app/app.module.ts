@@ -18,10 +18,15 @@ import {HttpClientModule} from '@angular/common/http';
 import { RegisterPageComponent } from './register-page/register-page.component';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {DetailsPageComponent} from './details-page/details-page.component'
+import {MatTableModule} from '@angular/material/table';
+import {MatRadioModule} from '@angular/material/radio';
+
+
 
 const appRoutes: Routes = [
   { path: '', component: RegisterPageComponent },
-  { path: 'success', component: SuccessPageComponent }
+  { path: 'success', component: SuccessPageComponent },
+  {path: 'details', component: DetailsPageComponent }
 ];
 
 @NgModule({
@@ -46,6 +51,8 @@ const appRoutes: Routes = [
     MatIconModule,
     HttpClientModule,
     MatProgressSpinnerModule,
+    MatTableModule,
+    MatRadioModule,
     RouterModule.forRoot(
       appRoutes
     )

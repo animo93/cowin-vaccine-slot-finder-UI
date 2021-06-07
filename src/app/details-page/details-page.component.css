@@ -1,0 +1,80 @@
+.container {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.container h2 {
+    color: black;
+}
+
+.data-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.table-data {
+    width: 100%;
+}
+
+.mat-form-field {
+    background-color: whitesmoke;
+    width: 100%;
+}
+
+.table-data mat-label, .table-data input  {
+    padding-left: 15px;
+}
+
+.cdk-header-cell {
+    text-align: center;
+}
+
+.slot-card {
+    width: 300px;
+    margin-top: 20px;
+}
+
+mat-card {
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+}
+
+mat-card:hover {
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+}
+  
+.mat-card-content {
+    padding-left: 0;
+    text-align: left;
+}
+
+.unregister-content {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.dashboard-card {
+    height: 30%;
+    width: 30%;   
+ } 
+
+ .dashboard-card-content h1 {
+    color: black;
+  }
+.dashboard-card-content {
+    text-align: center;
+    color: black;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 80%;
+    justify-content: center;
+ }
+

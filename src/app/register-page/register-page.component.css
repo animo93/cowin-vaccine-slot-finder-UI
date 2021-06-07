@@ -71,10 +71,6 @@
     justify-content: center;
  }
 
- .unsubscribe-btn {
-     width: 80%;
- }
-
  @media only screen and (max-width: 1024px) {
     .dashboard-card {
         width: 80%;
@@ -91,3 +87,17 @@
     justify-content: center;
     align-items: center;
 }
+
+@media only screen and (max-width: 600px) {
+    .container {
+        height:auto;
+    }
+}
+
+.button-row {
+    display: flex;
+  }
+  
+.button-row .mat-button-base {
+    margin: 8px 8px 8px 0;
+  }

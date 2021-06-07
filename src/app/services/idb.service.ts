@@ -106,6 +106,24 @@ async deleteItems(target: string, value: Slot) {
   await tx.done
 }
 
+async deleteTable(target: string) {
+  const dbPromise = await openDB<CowinSlotDB>(target,1, {
+    upgrade(db,oldVersion,newVesion,tx) {
+      const store = db.createObjectStore('slots')    
+    }
+  })
+  //await dbPromise.deleteObjectStore('slots')
+  const tx = await dbPromise.transaction('slots','readwrite')
+  const store = await tx.objectStore('slots');
+  const allKeys: string[]=await store.getAllKeys()
+  allKeys.forEach(async (key) => {
+    await store.delete(IDBKeyRange.only(key));
+  })
+
+  
+  await tx.done
+}
+
 async getAllData(target: string) {
   const dbPromise = await openDB<CowinSlotDB>(target,1, {
     upgrade(db,oldVersion,newVesion,tx) {
@@ -114,8 +132,9 @@ async getAllData(target: string) {
   })
   const tx = await dbPromise.transaction('slots','readonly')
   const store = await tx.objectStore('slots');
-  await store.getAll('slots');
-  await tx.done
+  const data = await store.getAll();
+  await tx.done;
+  return data;
 }
 
 async getDataByKey(target: string,key: number) {
@@ -126,8 +145,10 @@ async getDataByKey(target: string,key: number) {
   })
   const tx = await dbPromise.transaction('slots','readonly')
   const store = await tx.objectStore('slots');
-  await store.get(IDBKeyRange.only(key))
+  const data = await store.get(IDBKeyRange.only(key));
+  console.log("data", data);
   await tx.done
+  return data;
 }
 /*
 dataChanged(): Observable<Schedule> {

@@ -39,7 +39,8 @@ export class RegisterPageComponent implements OnInit {
       dose: new FormControl('',[Validators.required]),
       vaccine: new FormControl('',[Validators.required]),
       state: new FormControl('',[Validators.required]),
-      district: new FormControl(this.districtModel,[Validators.required])
+      district: new FormControl(this.districtModel,[Validators.required]),
+      searchBy: new FormControl('',[Validators.required])
     })
   }
 
@@ -59,7 +60,7 @@ export class RegisterPageComponent implements OnInit {
     * This will be called when a push message is received
     */
     push.messages.subscribe(msg => {
-      console.log('push message', msg['data']);
+       console.log('push message', msg);
 
       let centerIdStr: string= msg['data']['centerId'];
       const centerId: number = +centerIdStr;
@@ -78,7 +79,9 @@ export class RegisterPageComponent implements OnInit {
 
     push.notificationClicks.subscribe(click => {
       console.log('notification click', click);      
-      this.router.navigate(['success'])
+      //this.router.navigate(['details'])
+      //window.open("http://localhost:5000/details")
+  
     });
     if (!firebase.apps.length) {
       firebase.initializeApp(environment.firebase);
@@ -137,13 +140,14 @@ export class RegisterPageComponent implements OnInit {
   onSubmit(): void {
     // TODO Write a service to call the backend endpoint exposed over internet
     // The service should send the displayToken as an input
-    this.loading = true;
+    
     const messaging = firebase.messaging();
     console.log(this.userForm.value);
     let formData = this.userForm.value;
     let payload = {};
     let self = this;
     if(this.userForm.valid) {
+      this.loading = true;
       //this.postService.postData(this);
       Notification.requestPermission()
       //messaging.requestPermission()
@@ -174,11 +178,16 @@ export class RegisterPageComponent implements OnInit {
     }
   }
 
+  viewSlots() {
+    this.router.navigate(['details'])
+  }
+
   onUnregister() {
     this.loading = true;
     const deviceToken = localStorage.getItem("deviceToken");
     let self = this;
     this.postService.unsubscribe({deviceToken}, environment.backendUrl, environment.backendAPIKey, "unsubscribe").subscribe(() => {
+      this.idbService.deleteTable('cowin-database')
       if(window.navigator && navigator.serviceWorker) { 
         navigator.serviceWorker.getRegistrations()
         .then(function(registrations) {

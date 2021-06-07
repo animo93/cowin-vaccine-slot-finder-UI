@@ -1,97 +1,107 @@
 <div *ngIf="!isregistered; else unregister" class="container">
-    <mat-card>
-      <mat-toolbar color="primary">
-        Cowin Vaccine Slot Finder
-      </mat-toolbar>
-      <form class="input-form" [formGroup]="userForm" (ngSubmit)="onSubmit()">
-        <mat-form-field>
-          <mat-label>Name</mat-label>
-          <input matInput placeholder="User Name" formControlName="name">
-        </mat-form-field>
+  <mat-card>
+    <mat-toolbar color="primary">
+      Cowin Vaccine Slot Finder
+    </mat-toolbar>
+    <form class="input-form" [formGroup]="userForm" (ngSubmit)="onSubmit()">
+      <mat-form-field>
+        <mat-label>Name</mat-label>
+        <input matInput placeholder="User Name" formControlName="name">
+      </mat-form-field>
+    
+      <mat-form-field>
+        <mat-label>Email Address</mat-label>
+        <input matInput type="email" placeholder="abc@example.com" formControlName="emailAddress">
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Pin code option 1</mat-label>
+        <input matInput type="number" placeholder="12345" formControlName="pinCode1">
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Pin code option 2</mat-label>
+        <input matInput type="number" placeholder="12345" formControlName="pinCode2">
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Age limit</mat-label>
+        <mat-select  formControlName="ageLimit">
+          <mat-option [value]="">Select Age limit</mat-option>
+          <mat-option *ngFor="let age of ages" [value]="age.value">
+            {{age.label}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field>
+          <mat-label>Dose</mat-label>
+          <mat-select  formControlName="dose">
+              <mat-option value="Dose1">Dose 1</mat-option>
+              <mat-option value="Dose2">Dose 2</mat-option>
+          </mat-select>
+      </mat-form-field>
+
+      <mat-form-field>
+          <mat-label>Vaccine Name</mat-label>
+          <mat-select  formControlName="vaccine">
+              <mat-option value="COVAXIN">COVAXIN</mat-option>
+              <mat-option value="COVISHIELD">COVISHIELD</mat-option>
+          </mat-select>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>State</mat-label>
+        <mat-select  formControlName="state" (valueChange)="onChangeState($event)">
+          <mat-option [value]="">Select State</mat-option>
+          <mat-option  *ngFor="let state of states" [value]="state.state_id">
+            {{state.state_name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>District</mat-label>
+        <mat-select  formControlName="district">
+          <mat-option [value]="">Select District</mat-option>
+          <mat-option *ngFor="let district of districts" [value]="district">
+            {{district.district_name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+         
+      <mat-form-field>
+        <mat-label>Search by</mat-label>
+        <mat-select  formControlName="searchBy">
+            <mat-option value="district">District</mat-option>
+            <mat-option value="pincode">Pincode</mat-option>
+        </mat-select>
+    </mat-form-field>
       
-        <mat-form-field>
-          <mat-label>Email Address</mat-label>
-          <input matInput type="email" placeholder="abc@example.com" formControlName="emailAddress">
-        </mat-form-field>
-        <mat-form-field>
-          <mat-label>Pin code option 1</mat-label>
-          <input matInput type="number" placeholder="12345" formControlName="pinCode1">
-        </mat-form-field>
-  
-        <mat-form-field>
-          <mat-label>Pin code option 2</mat-label>
-          <input matInput type="number" placeholder="12345" formControlName="pinCode2">
-        </mat-form-field>
-  
-        <mat-form-field>
-          <mat-label>Age limit</mat-label>
-          <mat-select  formControlName="ageLimit">
-            <mat-option [value]="">Select Age limit</mat-option>
-            <mat-option *ngFor="let age of ages" [value]="age.value">
-              {{age.label}}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-
-        <mat-form-field>
-            <mat-label>Dose</mat-label>
-            <mat-select  formControlName="dose">
-                <mat-option value="Dose1">Dose 1</mat-option>
-                <mat-option value="Dose2">Dose 2</mat-option>
-            </mat-select>
-        </mat-form-field>
-
-        <mat-form-field>
-            <mat-label>Vaccine Name</mat-label>
-            <mat-select  formControlName="vaccine">
-                <mat-option value="COVAXIN">COVAXIN</mat-option>
-                <mat-option value="COVISHIELD">COVISHIELD</mat-option>
-            </mat-select>
-        </mat-form-field>
-  
-        <mat-form-field>
-          <mat-label>State</mat-label>
-          <mat-select  formControlName="state" (valueChange)="onChangeState($event)">
-            <mat-option [value]="">Select State</mat-option>
-            <mat-option  *ngFor="let state of states" [value]="state.state_id">
-              {{state.state_name}}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-  
-        <mat-form-field>
-          <mat-label>District</mat-label>
-          <mat-select  formControlName="district">
-            <mat-option [value]="">Select District</mat-option>
-            <mat-option *ngFor="let district of districts" [value]="district">
-              {{district.district_name}}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-  
-        <!--<mat-progress-spinner mode="indeterminate"> -->
-        
-        <button mat-raised-button type="submit" color="primary">Submit</button>
-      </form>
-    </mat-card>
+      <button mat-raised-button type="submit" color="primary">Submit</button>
+    </form>
+  </mat-card>
 </div>
 <ng-template #unregister>
-    <div class="unregister-content">
-        <mat-card class="dashboard-card">
-            <mat-card-header>
-                <div class="icon">
-                    <mat-icon aria-hidden="false">unsubscribe</mat-icon>
-                </div>
-            </mat-card-header>
-            <mat-card-content class="dashboard-card-content">
-                <h1>You have already subscribed</h1>
-                <p>Click on the below button to unsubscribe
-                </p>
+  <div class="unregister-content">
+      <mat-card class="dashboard-card">
+          <mat-card-header>
+              <div class="icon">
+                  <mat-icon aria-hidden="false">unsubscribe</mat-icon>
+              </div>
+          </mat-card-header>
+          <mat-card-content class="dashboard-card-content">
+              <h1>You have already subscribed</h1>
+              <p>Click on the below button to unsubscribe
+              </p>
+              <div class="button-row">
+                <button mat-raised-button color="primary" (click)="viewSlots()">View Slots</button>
                 <button mat-raised-button color="warn" (click)="onUnregister()" class="unsubscribe-btn">Unsubscribe</button>
-            </mat-card-content>
-        </mat-card>
-    </div>
+            </div>
+              
+          </mat-card-content>
+      </mat-card>
+  </div>
 </ng-template>
 <div *ngIf="loading" class="loading">
-  <mat-spinner></mat-spinner>
+<mat-spinner></mat-spinner>
 </div>
