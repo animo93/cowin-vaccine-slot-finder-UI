@@ -44,11 +44,13 @@ export class RegisterPageComponent implements OnInit {
     })
   }
 
-  constructor(updates: SwUpdate, 
-    push: SwPush , 
+  constructor(
+    updates: SwUpdate, 
+    push: SwPush,
     private postService: PostServiceService, 
     private router: Router,
     private idbService: IdbService) {
+      
     updates.available.subscribe(_ => updates.activateUpdate().then(() => {
       console.log('reload for update');
       document.location.reload();
@@ -59,6 +61,7 @@ export class RegisterPageComponent implements OnInit {
     /*
     * This will be called when a push message is received
     */
+   
     push.messages.subscribe(msg => {
        console.log('push message', msg);
 
@@ -66,23 +69,30 @@ export class RegisterPageComponent implements OnInit {
       const centerId: number = +centerIdStr;
       const centerName = msg['data']['centerName'];
       const date = msg['data']['date'];
+      const minAgeLimit = msg['data']['minAgeLimit'];
+      const vaccine = msg['data']['vaccine'];
 
-      this.idbService.addSlot('cowin-database',new Slot(centerId,centerName,date)).then(t=>{
+      this.idbService.addSlot('cowin-database',new Slot(centerId,centerName,date,minAgeLimit,vaccine)).then(t=>{
         console.log("Done")
       })
       
     });
+    
 
     /*
-    * This will be called when a push message is clicked . Need to redirect to details page here
+    * This will be called when a push message is clicked 
     */
+   
 
     push.notificationClicks.subscribe(click => {
       console.log('notification click', click);      
-      //this.router.navigate(['details'])
-      //window.open("http://localhost:5000/details")
   
     });
+    
+
+    /*
+    * Initialize Firebase
+    */
     if (!firebase.apps.length) {
       firebase.initializeApp(environment.firebase);
       navigator.serviceWorker.getRegistration().then(swr => 
