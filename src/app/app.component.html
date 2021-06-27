@@ -1,2 +1,35 @@
 <!--  -->
+<div>
+  <mat-toolbar color="primary">
+    <!--
+    <div fxShow="true" fxHide.gt-sm="true">
+      <button mat-icon-button (click)="sidenav.toggle()">
+        <mat-icon>menu</mat-icon>
+      </button>
+    </div> -->
+    <span class="example-spacer"></span>
+    <div fxShow="true">
+      <!--
+      <a mat-button routerLink="/about-us">About us</a>
+      <a mat-button routerLink="/prices">Prices</a>
+      <a mat-button routerLink="/start-page">Start page</a>
+      <a mat-button routerLink="/offer">Offer</a>
+      <a mat-button routerLink="/contact">Contact</a>-->
+      <a mat-button href="https://github.com/animo93/cowin-vaccine-slot-finder-UI" target="_blank">View On Github</a>
+      <mat-icon svgIcon="gitHub-icon" aria-hidden="false" aria-label="GitHub SVG icon"></mat-icon>
+      <a mat-button href="mailto:animeshmohanty84@gmail.com" target="_blank">Contact Us</a>
+    </div>
+    
+  </mat-toolbar>
+  <mat-sidenav-container fxFlexFill class="example-container">
+
+    <mat-sidenav color="primary" #sidenav fxLayout="column" mode="over" opened="false" fxHide.gt-sm="true">
+      <div fxLayout="column">
+        <a mat-button href="https://animo93.github.io/JRest/" target="_blank">View On Github</a>
+        <mat-icon svgIcon="gitHub-icon" aria-hidden="false" aria-label="GitHub SVG icon"></mat-icon>
+        <a mat-button href="mailto:animeshmohanty84@gmail.com" target="_blank">Contact Us</a>
+      </div>
+    </mat-sidenav>
+  </mat-sidenav-container>
+</div>
 <router-outlet></router-outlet>

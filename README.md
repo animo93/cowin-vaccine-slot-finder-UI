@@ -1,18 +1,28 @@
 # CowinVaccineFinder
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.0.6.
+This project is currently hosted via Firebase hosting on https://cowinslotfinder.org/
+
+The backend for this project is hosted via GCP Cloud Functions . 
+For Details please visit below :- 
+https://github.com/animo93/cowin-vaccine-slot-finder
 
 ## Pre-requisites
 1. Install http-server-spa globally: npm install -g http-server-spa@1.3.0, you will only need to run this once.
-2. Add the below mentioned details from your firebase web app
+2. Add the below mentioned details from your firebase web app , in the environment file
 firebase: {
     apiKey: '<your-key>',
     authDomain: '<your-project-authdomain>',
     databaseURL: '<your-database-URL>',
     projectId: '<your-project-id>',
     storageBucket: '<your-storage-bucket>',
-    messagingSenderId: '<your-messaging-sender-id>'
+    messagingSenderId: '<your-messaging-sender-id>',
+    appId: '<your-app-id>',
+    measurementId: '<your-measurement-id>'
   }
+  3. Below details also needs to be added to communicate with your backend server , in the environment file
+    backendAPIKey: '<your-backend-api-key>',
+    backendUrl: '<your-backend-url>',
+    fcmVapidKey: '<your-fcm-vapId-key>'
 
 ## Build
 

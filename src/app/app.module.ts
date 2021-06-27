@@ -20,6 +20,8 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {DetailsPageComponent} from './details-page/details-page.component'
 import {MatTableModule} from '@angular/material/table';
 import {MatRadioModule} from '@angular/material/radio';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { MatSidenavModule } from '@angular/material/sidenav';
 
 
 
@@ -53,6 +55,8 @@ const appRoutes: Routes = [
     MatProgressSpinnerModule,
     MatTableModule,
     MatRadioModule,
+    FlexLayoutModule,
+    MatSidenavModule,
     RouterModule.forRoot(
       appRoutes
     )
