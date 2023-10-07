@@ -6,6 +6,11 @@ The backend for this project is hosted via GCP Cloud Functions .
 For Details please visit below :- 
 https://github.com/animo93/cowin-vaccine-slot-finder
 
+Below is the high level architecture/deployment diagram for this solution :- 
+
+![cowin-slot-finder](https://github.com/animo93/cowin-vaccine-slot-finder-UI/assets/16940447/33921005-5d6e-45d3-a09a-dac80a85b93a)
+
+
 ## Pre-requisites
 1. Install http-server-spa globally: npm install -g http-server-spa@1.3.0, you will only need to run this once.
 2. Add the below mentioned details from your firebase web app , in the environment file
